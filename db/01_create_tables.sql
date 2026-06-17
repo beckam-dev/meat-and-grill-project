@@ -90,8 +90,8 @@ create table if not exists orders_details (
 create table if not exists items (
 	id bigint generated always as identity primary key,
 	name varchar(100) not null unique,
-	description varchar(500),	
-	amount integer not null,
+	description varchar(500),
+	sell_price money not null,		
 	item_type enum('dish', 'drink'),
 	is_active boolean default true not null
 );
@@ -108,9 +108,9 @@ create table if not exists drinks (
 	id bigint generated always as identity primary key,
 	id_item bigint not null,
 	id_measure_type bigint not null,
+	brand varchar(100) not null,
 	volume_ml integer not null,
-	is_alcoholic boolean not null	
-	is_active boolean default true not null,
+	is_alcoholic boolean not null,	
 	foreign key (id_item) references items(id),
 	foreign key (id_measure_type) references measures_types(id)
 );
