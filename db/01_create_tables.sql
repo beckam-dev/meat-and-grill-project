@@ -1,17 +1,4 @@
-create table if not exists users (
-	id bigint generated always as identity primary key,
-	id_person bigint not null,
-	code varchar(255) not null unique,
-	is_active boolean default true not null,
-	creation_date timestamp not null,
-	id_creator_user bigint not null,
-	last_edition_date timestamp not null,
-	id_editor_user bigint not null,
-	foreign key (id_person) references persons(id),
-	foreign key (id_creator_user) references users(id),
-	foreign key (id_editor_user) references users(id)
-);
-
+-- rollback;
 create table if not exists persons (
 	id bigint generated always as identity primary key,
 	dni varchar(8) not null unique,
@@ -22,13 +9,18 @@ create table if not exists persons (
 	address varchar(500) not null,
 	birth_date date not null,
 	is_active boolean default true not null,
-	creation_date timestamp not null,
-	id_creator_user bigint not null,
-	last_edition_date timestamp not null,
-	id_editor_user bigint not null,
-	foreign key (id_creator_user) references users(id),
-	foreign key (id_editor_user) references users(id)
+	creation_date timestamp not null
 );
+
+create table if not exists users (
+	id bigint generated always as identity primary key,
+	id_person bigint not null,
+	code varchar(255) not null unique,
+	is_active boolean default true not null,
+	creation_date timestamp not null,	
+	foreign key (id_person) references persons(id)	
+);
+
 
 create table if not exists records_persons (
 	id bigint generated always as identity primary key,
@@ -39,9 +31,8 @@ create table if not exists records_persons (
 	edition_date timestamp not null,
 	id_editor_user bigint not null,
 	foreign key (id_person) references persons(id),
-	foreign key (id_editor_user) references users(id),
+	foreign key (id_editor_user) references users(id)
 );
-
 
 create table if not exists records_users (
 	id bigint generated always as identity primary key,
@@ -49,7 +40,7 @@ create table if not exists records_users (
 	modified_field varchar(100) not null,	
 	edition_date timestamp not null,
 	id_editor_user bigint not null,
-	foreign key (id_editor_user) references users(id),
+	foreign key (id_editor_user) references users(id)
 );
 
 create table if not exists roles (
@@ -76,6 +67,17 @@ create table if not exists orders (
 	foreign key (id_client) references persons(id)
 );
 
+create type item_type_enum as enum ('dish', 'drink');
+
+create table if not exists items (
+	id bigint generated always as identity primary key,
+	name varchar(100) not null unique,
+	description varchar(500),
+	sell_price money not null,		
+	item_type item_type_enum not null,
+	is_active boolean default true not null
+);
+
 create table if not exists orders_details (
 	id bigint generated always as identity primary key,
 	id_order bigint not null,
@@ -87,21 +89,17 @@ create table if not exists orders_details (
 	foreign key (id_item) references items(id)
 );
 
-create table if not exists items (
-	id bigint generated always as identity primary key,
-	name varchar(100) not null unique,
-	description varchar(500),
-	sell_price money not null,		
-	item_type enum('dish', 'drink'),
-	is_active boolean default true not null
-);
-
 create table if not exists dishes (
 	id bigint generated always as identity primary key,
 	id_item bigint not null,
 	max_garnishes integer not null,
 	is_active boolean default true not null,
 	foreign key (id_item) references items(id)
+);
+
+create table if not exists measures_types (
+	id bigint generated always as identity primary key,	
+	name varchar(100) not null unique
 );
 
 create table if not exists drinks (
@@ -113,11 +111,6 @@ create table if not exists drinks (
 	is_alcoholic boolean not null,	
 	foreign key (id_item) references items(id),
 	foreign key (id_measure_type) references measures_types(id)
-);
-
-create table if not exists measures_types (
-	id bigint generated always as identity primary key,	
-	name varchar(100) not null unique
 );
 
 create table if not exists supplies_categories (
@@ -180,6 +173,4 @@ create table if not exists orders_details_additions (
 	foreign key (id_order_detail) references orders_details(id),
 	foreign key (id_supply) references supplies(id)
 );
-
-
 
