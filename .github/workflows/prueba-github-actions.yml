@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: Mostrar información del runner
-         run: |
+        run: |
           echo "GitHub Actions funcionando correctamente"
           echo "Runner: $RUNNER_NAME"
           echo "Sistema operativo: $RUNNER_OS"
