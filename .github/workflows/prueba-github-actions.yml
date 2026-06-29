@@ -2,6 +2,8 @@ name: Prueba de GitHub Actions
 
 on:
   workflow_dispatch:
+  push:
+    branches: [ "feature/estructura-github-actions" ]
 
 jobs:
   test:
