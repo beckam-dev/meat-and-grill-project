@@ -15,7 +15,9 @@ jobs:
         env:
           POSTGRES_PASSWORD: postgres
           POSTGRES_USER: postgres
-          POSTGRES_DB: db_prueba_tablas        
+          POSTGRES_DB: db_prueba_tablas
+        ports:
+          - 5432:5432
         options: >-
           --health-cmd="pg_isready -U postgres"
           --health-interval=10s
@@ -29,6 +31,6 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y postgresql-client
       
       - name: Crear tablas
-        run: psql -h postgres -U postgres -d db_prueba_tablas -f db/01_create_tables.sql
+        run: psql -h localhost -U postgres -d db_prueba_tablas -f db/01_create_tables.sql
         env:
           PGPASSWORD: postgres
