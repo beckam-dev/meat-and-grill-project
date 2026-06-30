@@ -25,7 +25,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
+      - name: Instalar cliente PostgreSQL
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client
+      
       - name: Crear tablas
-        run: psql -h localhost -U postgres -d db_prueba_tablas -f db/01_create_tables.sql
+        run: psql -h postgres -U postgres -d db_prueba_tablas -f db/01_create_tables.sql
         env:
           PGPASSWORD: postgres
