@@ -1,28 +1,32 @@
 <div class="sistema-container">
   
-  <!-- SECCIÓN IZQUIERDA: MENÚ (Se mantiene igual a tu diseño actual) -->
+  <!-- SECCIÓN IZQUIERDA: MENÚ -->
   <div class="menu-seccion">
-    <h2> Menú - Jessi Carnes y Parrillas</h2>
+    <h2> Menú del Día</h2>
     <div class="productos-grid">
       <div class="producto-card" *ngFor="let plato of menu">
-        <h3>{{ plato.nombre }}</h3>
-        <p class="descripcion">{{ plato.descripcion }}</p>
-        <span class="precio">S/. {{ plato.precio | number:'1.2-2' }}</span>
-        <button (click)="agregarAlPedido(plato)">Agregar al Pedido</button>
+        <div>
+          <span class="categoria-badge">{{ plato.categoria }}</span>
+          <h3>{{ plato.nombre }}</h3>
+          <p class="descripcion">{{ plato.descripcion }}</p>
+        </div>
+        <div>
+          <div class="precio">S/. {{ plato.precio | number:'1.2-2' }}</div>
+          <button (click)="agregarAlPedido(plato)">Agregar al Pedido</button>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- SECCIÓN DERECHA: CARRITO TOTALMENTE DINÁMICO -->
+  <!-- SECCIÓN DERECHA: COMANDA -->
   <div class="comanda-seccion">
     <h2> Pedido Actual</h2>
     
     <div class="mesa-input">
-      <label>Número de Mesa:</label>
+      <label>Número de Mesa</label>
       <input type="number" [(ngModel)]="numeroMesa" placeholder="Ej. 5">
     </div>
 
-    <!-- Lista de items agregados -->
     <div class="resumen-lista">
       <p class="vacio-txt" *ngIf="carrito.length === 0">No hay productos seleccionados en esta mesa.</p>
       
@@ -31,16 +35,14 @@
           <strong>{{ item.nombre }} (x{{ item.cantidad }})</strong>
           <span>S/. {{ (item.precio * item.cantidad) | number:'1.2-2' }}</span>
         </div>
-        <!-- Input para que el mozo ingrese el término de la carne o detalles -->
-        <input type="text" [(ngModel)]="item.notas" placeholder="Notas (ej. término 3/4, sin hielo)..." class="nota-input">
-        <button (click)="eliminarDelPedido(i)" class="btn-eliminar">Quitar</button>
+        <input type="text" [(ngModel)]="item.notes" placeholder="Notas (término de carne, guarnición...)" class="nota-input">
+        <button (click)="eliminarDelPedido(i)" class="btn-eliminar">Quitar del pedido</button>
       </div>
     </div>
 
-    <!-- Caja de totales e interacciones -->
     <div class="total-box">
-      <h3>Total: S/. {{ totalPedido | number:'1.2-2' }}</h3>
-      <button (click)="enviarA_Cocina()" class="btn-enviar">Enviar a Cocina </button>
+      <h3>Total <span>S/. {{ totalPedido | number:'1.2-2' }}</span></h3>
+      <button (click)="enviarA_Cocina()" class="btn-enviar">Enviar a Cocina</button>
     </div>
   </div>
 

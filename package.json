@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --base-href /meat-and-grill-project/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:meat-and-grill-frontend": "node dist/meat-and-grill-frontend/server/server.mjs"
