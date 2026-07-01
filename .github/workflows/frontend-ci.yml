@@ -1,0 +1,32 @@
+name: Frontend CI (Validación de Interfaz)
+
+on:
+  push:
+    branches:
+      - master
+      - main
+      - feature/*
+  pull_request:
+    branches:
+      - master
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout del código
+      uses: actions/checkout@v4
+
+    - name: Configurar Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+
+    - name: Instalar dependencias limpias
+      run: npm ci
+
+    - name: Construir proyecto Angular (Build SSR)
+      run: npm run build
