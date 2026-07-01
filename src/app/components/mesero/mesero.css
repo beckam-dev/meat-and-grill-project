@@ -1,0 +1,150 @@
+.sistema-container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  min-height: 90vh;
+}
+
+.menu-seccion {
+  flex: 2;
+}
+
+.menu-seccion .productos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.menu-seccion .producto-card {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.menu-seccion .producto-card h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.menu-seccion .producto-card .descripcion {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.menu-seccion .producto-card .precio {
+  font-weight: bold;
+  color: #b22222;
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.menu-seccion .producto-card button {
+  background-color: #b22222;
+  /* Rojo parrillero */
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.menu-seccion .producto-card button:hover {
+  background-color: #8b0000;
+}
+
+.comanda-seccion {
+  flex: 1;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: max-content;
+}
+
+.comanda-seccion .mesa-input {
+  margin: 15px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.comanda-seccion .mesa-input input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.comanda-seccion .btn-enviar {
+  width: 100%;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.comanda-seccion .btn-enviar:hover {
+  background-color: #218838;
+}
+
+.comanda-seccion .item-carrito {
+  background: #f1f3f5;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.comanda-seccion .item-carrito .item-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+}
+
+.comanda-seccion .item-carrito .nota-input {
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+.comanda-seccion .item-carrito .btn-eliminar {
+  background: none;
+  border: none;
+  color: #dc3545;
+  text-align: right;
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.comanda-seccion .item-carrito .btn-eliminar:hover {
+  text-decoration: underline;
+}
+
+.comanda-seccion .resumen-lista {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 15px;
+}
