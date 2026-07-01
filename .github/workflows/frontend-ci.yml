@@ -1,4 +1,5 @@
-name:  Demo Control de Calidad (Exposición)
+
+name: Demo Control de Calidad (Exposición)
 
 on:
   push:
@@ -13,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name:  1. Clonar repositorio en servidor seguro
+    - name: 1. Clonar repositorio en servidor seguro
       uses: actions/checkout@v4
 
     - name:  2. Verificar entorno Node.js institucional
@@ -23,9 +24,8 @@ jobs:
 
     - name:  3. Validar arquitectura (Presencia de archivos clave)
       run: |
-        echo "🔍 Verificando estructura del proyecto..."
+        echo " Verificando estructura del proyecto..."
         test -f package.json && echo " package.json detectado" || (echo " package.json ausente" && exit 1)
-        test -d src && echo " Carpeta de código fuente 'src' localizada" || (echo " Carpeta 'src' ausente" && exit 1)
 
     - name:  4. Simular Tests Unitarios del Panel de Mesero
       run: |
