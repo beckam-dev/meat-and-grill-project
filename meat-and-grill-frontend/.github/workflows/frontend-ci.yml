@@ -3,11 +3,14 @@ name: Frontend CI/CD (Validación y Despliegue)
 on:
   push:
     branches:
-      - main
       - master
+      - main
       - feature/frontend-ui
+  pull_request:
+    branches:
+      - master
+      - main
 
-# Permisos necesarios para que GitHub Actions pueda publicar en GitHub Pages
 permissions:
   contents: read
   pages: write
@@ -33,17 +36,15 @@ jobs:
     - name: Construir proyecto Angular (Static Prerender)
       run: npm run build
 
-    # Paso CD 1: Configurar el entorno de Pages en la máquina virtual
     - name: Configurar Entorno de Páginas
       uses: actions/configure-pages@v4
 
-    # Paso CD 2: Subir la carpeta compilada (En Angular moderno con SSR/Prerender la ruta es dist/meat-and-grill-frontend/browser)
     - name: Subir Artefacto de Producción
       uses: actions/upload-pages-artifact@v3
       with:
+        # Apunta directamente a la carpeta de salida en tu raíz actual
         path: dist/meat-and-grill-frontend/browser
 
-    # Paso CD 3: Publicar los archivos en el servidor de GitHub Pages
     - name: Desplegar en GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v4
