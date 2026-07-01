@@ -1,0 +1,49 @@
+<div class="sistema-container">
+  
+  <!-- SECCIÓN IZQUIERDA: MENÚ -->
+  <div class="menu-seccion">
+    <h2> Menú del Día</h2>
+    <div class="productos-grid">
+      <div class="producto-card" *ngFor="let plato of menu">
+        <div>
+          <span class="categoria-badge">{{ plato.categoria }}</span>
+          <h3>{{ plato.nombre }}</h3>
+          <p class="descripcion">{{ plato.descripcion }}</p>
+        </div>
+        <div>
+          <div class="precio">S/. {{ plato.precio | number:'1.2-2' }}</div>
+          <button (click)="agregarAlPedido(plato)">Agregar al Pedido</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECCIÓN DERECHA: COMANDA -->
+  <div class="comanda-seccion">
+    <h2> Pedido Actual</h2>
+    
+    <div class="mesa-input">
+      <label>Número de Mesa</label>
+      <input type="number" [(ngModel)]="numeroMesa" placeholder="Ej. 5">
+    </div>
+
+    <div class="resumen-lista">
+      <p class="vacio-txt" *ngIf="carrito.length === 0">No hay productos seleccionados en esta mesa.</p>
+      
+      <div class="item-carrito" *ngFor="let item of carrito; let i = index">
+        <div class="item-info">
+          <strong>{{ item.nombre }} (x{{ item.cantidad }})</strong>
+          <span>S/. {{ (item.precio * item.cantidad) | number:'1.2-2' }}</span>
+        </div>
+        <input type="text" [(ngModel)]="item.notes" placeholder="Notas (término de carne, guarnición...)" class="nota-input">
+        <button (click)="eliminarDelPedido(i)" class="btn-eliminar">Quitar del pedido</button>
+      </div>
+    </div>
+
+    <div class="total-box">
+      <h3>Total <span>S/. {{ totalPedido | number:'1.2-2' }}</span></h3>
+      <button (click)="enviarA_Cocina()" class="btn-enviar">Enviar a Cocina</button>
+    </div>
+  </div>
+
+</div>
