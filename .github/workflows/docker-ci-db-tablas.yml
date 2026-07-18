@@ -28,12 +28,12 @@ jobs:
       - name: Construir imagen
         run: |
           docker build \
-            -t ghcr.io/${{ github.repository }}/postgres-custom:latest \
+            -t ghcr.io/${{ github.repository }}/postgres-custom-v2 \
             .
 
       - name: Publicar imagen
         run: |
-          docker push ghcr.io/${{ github.repository }}/postgres-custom:latest
+          docker push ghcr.io/${{ github.repository }}/postgres-custom-v2
 
   test:
     needs: build
@@ -42,7 +42,7 @@ jobs:
     
     services:
       postgres:
-        image: ghcr.io/${{ github.repository }}/postgres-custom:latest
+        image: ghcr.io/${{ github.repository }}/postgres-custom-v2
         credentials:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
