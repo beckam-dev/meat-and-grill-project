@@ -19,8 +19,8 @@ public class DataInitializer implements CommandLineRunner {
         if (roleRepository.count() == 0) {
             roleRepository.save(new Role(RoleName.ROLE_ADMIN));
             roleRepository.save(new Role(RoleName.ROLE_COCINA));
-            roleRepository.save(new Role(RoleName.ROLE_ADMIN));
-            System.out.println("Roles base (ADMIN, COCINA, ADMIN) creados con éxito desde DataInitializer.");
+            roleRepository.save(new Role(RoleName.ROLE_MESERO));
+            System.out.println("Roles base (ADMIN, COCINA, MESERO) creados con éxito desde DataInitializer.");
         }
     }
 }

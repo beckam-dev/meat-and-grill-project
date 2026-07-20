@@ -30,7 +30,7 @@ jobs:
       - name: Esperar backend
         run: |
           for i in {1..30}; do
-            if curl -f http://localhost:8080; then
+            if curl -f http://localhost:8080/api/roles; then
               echo "Backend disponible"
               exit 0
             fi
