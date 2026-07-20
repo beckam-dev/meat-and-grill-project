@@ -1,0 +1,47 @@
+name: Backend CI Docker
+
+on:
+  push:
+    branches:
+      - feature/backend
+
+permissions:
+  contents: read
+
+
+jobs:
+
+  docker-build-test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Descargar código
+        uses: actions/checkout@v4
+
+
+      - name: Construir imagen Docker
+        run: docker compose build
+
+
+      - name: Levantar aplicación
+        run: docker compose up -d
+
+
+      - name: Esperar inicio del backend
+        run: sleep 30
+
+
+      - name: Verificar backend
+        run: curl --fail http://localhost:8080
+
+
+      - name: Logs si falla
+        if: failure()
+        run: docker compose logs
+
+
+      - name: Apagar contenedores
+        if: always()
+        run: docker compose down -v
