@@ -1,0 +1,54 @@
+name: Backend CI Docker
+
+on:
+  push:
+    branches:
+      - feature/backend
+
+permissions:
+  contents: read
+
+jobs:
+  docker-build-test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Descargar código
+        uses: actions/checkout@v4
+
+
+      - name: Construir imágenes
+        run: docker compose build
+
+
+      - name: Levantar servicios
+        run: docker compose up -d
+
+
+      - name: Esperar backend
+        run: |
+          for i in {1..30}; do
+            if curl -f http://localhost:8080; then
+              echo "Backend disponible"
+              exit 0
+            fi
+
+            echo "Esperando backend..."
+            sleep 5
+          done
+
+          echo "Backend no inició"
+          docker compose logs
+          exit 1
+
+
+      - name: Verificar logs si falla
+        if: failure()
+        run: docker compose logs
+
+
+      - name: Apagar servicios
+        if: always()
+        run: docker compose down -v
