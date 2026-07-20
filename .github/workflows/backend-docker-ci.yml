@@ -1,4 +1,4 @@
-name: Backend Docker CI
+name: Meat Grill Backend CI
 
 on:
   push:
