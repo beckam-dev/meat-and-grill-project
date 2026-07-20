@@ -241,3 +241,4 @@ feature/backend
 
 Los cambios deben realizarse mediante commits y pushes hacia dicha rama para ejecutar el pipeline de integración continua.
 
+test
