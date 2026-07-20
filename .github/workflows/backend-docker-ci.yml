@@ -3,7 +3,7 @@ name: Meat Grill Backend CI
 on:
   push:
     branches:
-      - feature/backend
+      - feature/backend-docker
 
 permissions:
   contents: read
